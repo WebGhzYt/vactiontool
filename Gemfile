@@ -6,8 +6,11 @@ gem 'rails', '4.0.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
+gem 'devise'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'bootstrap-sass'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -43,3 +46,10 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+#gem 'pg'
+
+group :production do
+   gem 'pg'	 
+  gem 'rails_12factor'#, '0.0.2'
+end
