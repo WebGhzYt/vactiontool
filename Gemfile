@@ -7,6 +7,10 @@ gem 'rails', '4.0.2'
 gem 'sqlite3'
 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'protected_attributes'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
