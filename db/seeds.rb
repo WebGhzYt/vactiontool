@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+ ActiveRecord::Base.connection.execute("TRUNCATE roles")
+ ActiveRecord::Base.connection.reset_pk_sequence!('roles')
+
+  roles = ['Admin','Manager','Employee']
+
+  roles.each do |index|
+     role = Role.new(:role_name => index)
+     role.save!
+  end
