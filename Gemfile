@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.2'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
 
 gem 'devise'
 gem 'omniauth'
@@ -51,9 +51,9 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-#gem 'pg'
+gem 'pg'
 
 group :production do
-   gem 'pg'	 
+   #gem 'pg'	 
   gem 'rails_12factor'#, '0.0.2'
 end
