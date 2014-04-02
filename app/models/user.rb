@@ -3,12 +3,14 @@ class User < ActiveRecord::Base
   # validates :provider, presence: true, length: { maximum: 50 }
   # validates :uid, presence: true, length: { maximum: 50 }
   has_and_belongs_to_many :role
+  
+  has_many :emp_leave_records
 
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :provider, :uid
 
  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info

@@ -1,8 +1,9 @@
-<div class="row">
-    <div class="center hero-unit">
-       <aside class="span4">
-
-         <h1> Welcome to the Vacation Tool </h1>
-       </aside>
-    </div>
-</div>         
+<div class="jumbotron">
+  <h2>Welcome to the Vacation Tool</h2>
+   <%  if user_signed_in? %>
+   	<%#= current_user.inspect %>
+   <p> Total Leaves <%= current_user.emp_leave_records.first.total_leaves %> </p>
+   <p> <%#= current_user.emp_leave_records.leaves_taken %> </p>
+   <% end %>
+  <p><%= link_to 'Applied for leaves', new_vacation_path, :class => 'btn btn-success btn-lg bt' %></p>
+</div>

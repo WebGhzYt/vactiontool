@@ -1,0 +1,64 @@
+<% provide(:title, 'Applied for Leaves') %>
+<div class="index_content loginPage">
+	<div class="loginForm">
+	   <div class="login_area">
+		   <div class="">
+				 <h1 class="pageTitle ">Leaves</h1>
+			 </div>
+
+       <%= form_for @vacation, url: vacations_path do |f| %>
+          <div class="fieldname">
+      	   <h1><%= f.label :applied_date %></h1>
+     		   <div class="login_field"> 
+			         <%= f.text_field :applied_date, class:"nameField", value:"" %>
+		        </div>
+	        </div>
+          <div class="clear"></div>
+          <div class="fieldname">
+      	    <h1><%= f.label :leave_type %></h1>
+     		    <div class="login_field"> 
+			       <%= f.select(:leave_type, options_for_select([['SL', 'sl'], ['CL', 'cl'], ['PL', 'pl'], ['Comp off', 'copm off']])) %>
+		        </div>
+	        </div>
+          <div class="clear"></div>
+          <div class="fieldname">
+      	   <h1><%= f.label :reason %></h1>
+     		   <div class="login_field"> 
+			       <%= f.text_field :reason, class:"nameField", value:"" %>
+		       </div>
+	       </div>
+         <div class="clear"></div>
+         <div class="fieldname">
+      	   <h1><%= f.label :leaves_from %></h1>
+     		   <div class="login_field"> 
+			       <%= f.text_field :leaves_from, class:"nameField", value:"" %>
+		       </div>
+	       </div>
+         <div class="clear"></div>
+	       <div class="fieldname">
+      	   <h1><%= f.label :leaves_to %></h1>
+     		   <div class="login_field"> 
+			       <%= f.text_field :leaves_to, class:"nameField", value:"" %>
+		       </div>
+	       </div>
+         <div class="clear"></div>
+         <div class="fieldname">
+      	   <h1><%= f.label :status %></h1>
+     		   <div class="login_field"> 
+			       <%= f.text_field :status, class:"nameField", value:"" %>
+		       </div>
+	      </div>
+          <div class="clear"></div>
+          <div class="fieldname">
+      	   <h1><%= f.label :status_date %></h1>
+     		   <div class="login_field"> 
+			       <%= f.text_field :status_date, class:"nameField", value:"" %>
+		       </div>
+	        </div>
+          <div class="clear"></div>
+          <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+	        <div class="clear"></div>
+       <% end %>
+    </div> 
+  </div>
+</div>
