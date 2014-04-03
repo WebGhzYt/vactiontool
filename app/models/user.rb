@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   # validates :uid, presence: true, length: { maximum: 50 }
   has_and_belongs_to_many :role
   
+  belongs_to :manager, class_name: 'User'
   has_one :leave_record
 
   devise :database_authenticatable, :registerable, :omniauthable,
@@ -18,17 +19,14 @@ class User < ActiveRecord::Base
   
      registered_user = User.where(:email => access_token.info.email).first
       if registered_user
-       logger.debug "elseeeee hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" 
-
         return registered_user
-      elsif data["email"].include?('@ongraph.com')
-        logger.debug "elseeeee hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii ongraphhhhh" 
+      elsif data["email"].include?('@ongraph.com') 
         user = User.create(name:    data["name"],
                            provider: access_token.provider,
                            email:    data["email"],
                            uid:      access_token.uid ,
-                           password: Devise.friendly_token[0,20]
-                           )
+                           password: Devise.friendly_token[0,20],
+                           manager_id: 0  )
         
         
     end

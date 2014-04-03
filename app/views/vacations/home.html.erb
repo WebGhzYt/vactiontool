@@ -2,6 +2,11 @@
   <h2>Welcome to the Vacation Tool</h2>
    <%  if user_signed_in? %>
    	<%#= current_user.inspect %>
+   	<% if current_user.manager_id == 0 %>
+   	  <p>You have not Assigned any Manager yet <p>
+   	<% else %>	
+     <p> Manager : <%= current_user.manager.name %> <p>
+    <% end %> 	
    <p> Total Leaves <%= current_user.leave_record.total_leaves %> </p>
    <p> Leaves Taken <%= current_user.leave_record.leaves_taken %> </p>
    <% end %>

@@ -12,7 +12,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
           LeaveRecord.create(total_leaves: 24,
                              leaves_taken: 0,
                              user_id: @user.id
-                                          )
+                            )
         end
         sign_in_and_redirect @user, :event => :authentication
       else
