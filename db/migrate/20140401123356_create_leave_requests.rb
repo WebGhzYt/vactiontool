@@ -1,6 +1,6 @@
 class CreateLeaveRequests < ActiveRecord::Migration
   def change
-    create_table :leaves_applieds do |t|
+    create_table :leave_requests do |t|
       t.datetime :applied_date
       t.string :leave_type
       t.string :reason

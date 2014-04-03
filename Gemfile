@@ -9,8 +9,7 @@ gem 'rails', '4.0.2'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-gem 'protected_attributes'
-
+#gem 'protected_attributes'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

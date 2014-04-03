@@ -11,6 +11,6 @@
   roles = ['Admin','Manager','Employee']
 
   roles.each do |index|
-     role = Role.new(:role_name => index)
+     role = Role.new(:name => index)
      role.save!
   end

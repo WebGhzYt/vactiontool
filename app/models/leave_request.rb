@@ -1,7 +1,7 @@
 class LeaveRequest < ActiveRecord::Base
    
 
-    attr_accessible :applied_date, :leave_type, :reason, :leaves_from, :leaves_to, :status, :status_date
+    #attr_accessible :applied_date, :leave_type, :reason, :leaves_from, :leaves_to, :status, :status_date
 
 	validates :applied_date, presence: true, length: { maximum: 50 }
 	validates :leave_type, presence: true, length: { maximum: 50 }

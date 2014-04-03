@@ -1,4 +1,4 @@
-class AddRoleUserJoin < ActiveRecord::Migration
+class CreateRolesUsersJoinTable < ActiveRecord::Migration
   def change
     create_table :roles_users, :id => false do |t|
       t.integer :role_id

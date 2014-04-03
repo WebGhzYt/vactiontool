@@ -4,13 +4,13 @@ class User < ActiveRecord::Base
   # validates :uid, presence: true, length: { maximum: 50 }
   has_and_belongs_to_many :role
   
-  has_many :emp_leave_records
+  has_one :leave_record
 
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid, :name
+  #attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :provider, :uid
 
  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -19,16 +19,18 @@ class User < ActiveRecord::Base
      registered_user = User.where(:email => access_token.info.email).first
       if registered_user
        logger.debug "elseeeee hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" 
+
         return registered_user
       elsif data["email"].include?('@ongraph.com')
         logger.debug "elseeeee hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii ongraphhhhh" 
-        user = User.create(name: data["name"],
-               provider:access_token.provider,
-               email: data["email"],
-               uid: access_token.uid ,
-               password: Devise.friendly_token[0,20],
-                                                   )
-      
+        user = User.create(name:    data["name"],
+                           provider: access_token.provider,
+                           email:    data["email"],
+                           uid:      access_token.uid ,
+                           password: Devise.friendly_token[0,20]
+                           )
+        
+        
     end
   end
 end 
