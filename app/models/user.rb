@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid, :name
 
  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -23,11 +23,11 @@ class User < ActiveRecord::Base
       elsif data["email"].include?('@ongraph.com')
         logger.debug "elseeeee hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii ongraphhhhh" 
         user = User.create(name: data["name"],
-          provider:access_token.provider,
-          email: data["email"],
-          uid: access_token.uid ,
-          password: Devise.friendly_token[0,20],
-        )
+               provider:access_token.provider,
+               email: data["email"],
+               uid: access_token.uid ,
+               password: Devise.friendly_token[0,20],
+                                                   )
       
     end
   end

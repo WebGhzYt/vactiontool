@@ -16,7 +16,8 @@ class ApplicationController < ActionController::Base
                                                               :password_confirmation,
                                                               :email,
                                                               :provider,
-                                                              :uid) }
+                                                              :uid,
+                                                              :name) }
   end
   
   # def check_access

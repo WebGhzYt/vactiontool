@@ -1,4 +1,4 @@
-class CreateEmpLeaveRecord < ActiveRecord::Migration
+class CreateEmpLeaveRecords < ActiveRecord::Migration
   def change
     create_table :emp_leaves do |t|
       t.integer :user_id
