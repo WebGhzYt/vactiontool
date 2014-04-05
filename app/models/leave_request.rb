@@ -18,25 +18,49 @@ class LeaveRequest < ActiveRecord::Base
 		leaves_to = self.leaves_to
 		leaves_from = self.leaves_from
 		applied_date = self.applied_date
+		user_id = self.user_id
 
 		leave_days = (leaves_to.to_date - leaves_from.to_date).to_i + 1 
-		logger.debug leave_days
+		
 
 		leave_applied_gap = (leaves_from.to_date - applied_date.to_date).to_i
-		logger.debug leave_applied_gap
+		
 
 
 		@record = LeaveRecord.find_by(@user_id)
 		remaining_leaves = 24 - @record.leaves_taken
-		logger.debug remaining_leaves
+		
 
-		if leave_type == 'PL' && leave_applied_gap < 14
-			errors.add(:base, "Sorry not granted, as you should inform earlier!")
-			logger.debug "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
-			logger.debug leave_type
-			logger.debug leave_days
+		planned_leaves=LeaveRequest.where(:leave_type => 'PL')
+		pl_leaves=planned_leaves.count
+		
+
+		casual_leaves=LeaveRequest.where(:leave_type => 'CL')
+		cl_leaves=casual_leaves.count
+		
+		
+
+		if leave_type == 'PL' && pl_leaves <= 6
+			
+			if leave_applied_gap < 14
+				errors.add(:base, "Sorry not granted, as you should inform 2 weeks earlier!")
+			else
+				errors.add(:base, "Sorry not granted, as you already accessed all your planned leaves!")
+			end
+
+			
 		end
-		#if 
+
+		
+		 if leave_type == 'CL' && cl_leaves <=5
+		 	
+  			if leave_days > 1
+  				errors.add(:base, "Sorry not granted, as only one casual leave can be granted at a time!")
+  			else
+  				errors.add(:base, "Sorry not granted, as you already accessed all your casual leaves!")
+  			end
+  		end
+
 	end
 
 	
