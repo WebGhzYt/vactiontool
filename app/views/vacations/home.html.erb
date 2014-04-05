@@ -10,5 +10,8 @@
    <p> Total Leaves <%= current_user.leave_record.total_leaves %> </p>
    <p> Leaves Taken <%= current_user.leave_record.leaves_taken %> </p>
    <% end %>
-  <p><%= link_to 'Applied for leaves', new_vacation_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
+  <p><%= link_to 'New Vacation Request', new_vacation_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
+   <% flash.each do |name, message| %>
+        <%= content_tag :div, message, id: "flash_#{name}"  %>
+      <% end %>
 </div>

@@ -61,6 +61,10 @@ class LeaveRequest < ActiveRecord::Base
   			end
   		end
 
+  	  if remaining_leaves < leave_days
+        errors.add(:base, "If you cross deadline of 24 leaves it will be Unpaid plz aware") 
+       end
+
 	end
 
 	
