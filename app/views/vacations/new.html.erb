@@ -1,64 +1,48 @@
 <% provide(:title, 'Applied for Leaves') %>
-<div class="index_content loginPage">
-	<div class="loginForm">
-	   <div class="login_area">
-		   <div class="">
-				 <h1 class="pageTitle ">Leaves</h1>
-			 </div>
-
-       <%= form_for @vacation, url: vacations_path do |f| %>
-          <div class="fieldname">
-      	   <h1><%= f.label :applied_date %></h1>
-     		   <div class="login_field"> 
-			         <%= f.text_field :applied_date, class:"nameField", value:"" %>
-		        </div>
-	        </div>
-          <div class="clear"></div>
-          <div class="fieldname">
-      	    <h1><%= f.label :leave_type %></h1>
-     		    <div class="login_field"> 
-			       <%= f.select(:leave_type, options_for_select([['SL', 'sl'], ['CL', 'cl'], ['PL', 'pl'], ['Comp off', 'copm off']])) %>
-		        </div>
-	        </div>
-          <div class="clear"></div>
-          <div class="fieldname">
-      	   <h1><%= f.label :reason %></h1>
-     		   <div class="login_field"> 
-			       <%= f.text_field :reason, class:"nameField", value:"" %>
-		       </div>
-	       </div>
-         <div class="clear"></div>
-         <div class="fieldname">
-      	   <h1><%= f.label :leaves_from %></h1>
-     		   <div class="login_field"> 
-			       <%= f.text_field :leaves_from, class:"nameField", value:"" %>
-		       </div>
-	       </div>
-         <div class="clear"></div>
-	       <div class="fieldname">
-      	   <h1><%= f.label :leaves_to %></h1>
-     		   <div class="login_field"> 
-			       <%= f.text_field :leaves_to, class:"nameField", value:"" %>
-		       </div>
-	       </div>
-         <div class="clear"></div>
-         <div class="fieldname">
-      	   <h1><%= f.label :status %></h1>
-     		   <div class="login_field"> 
-			       <%= f.text_field :status, class:"nameField", value:"" %>
-		       </div>
-	      </div>
-          <div class="clear"></div>
-          <div class="fieldname">
-      	   <h1><%= f.label :status_date %></h1>
-     		   <div class="login_field"> 
-			       <%= f.text_field :status_date, class:"nameField", value:"" %>
-		       </div>
-	        </div>
-          <div class="clear"></div>
-          <%= f.submit "Create", class: "btn btn-large btn-primary" %>
-	        <div class="clear"></div>
-       <% end %>
-    </div> 
-  </div>
+<div class="container containerwidth" style="background-color:#ffffff;border:1px solid #dedede;box-shadow:8px 8px 8px 8px #dedede;">
+  
+ <div class="">
+  <h2 class="pageTitle ">Leaves Request Form</h2>
+ </div>
+  <%= form_for @vacation, url: vacations_path do |f| %>
+   <%= f.hidden_field :user_id, :value => current_user.id%>
+   <%= f.hidden_field :status, :value => 'pending'%>
+   <%= f.hidden_field :applied_date, :value => Time.now%>
+   <%= f.hidden_field :status_date, :value => ''%>
+    <%= render 'shared/error_messages', object: f.object %>
+    <form class="form-horizontal" role="form">
+  
+      <div class="form-group">
+       <%= f.label :leave_type, class:"col-sm-8 control-label" %>
+       <div class="col-sm-10"> 
+      <%= f.select(:leave_type, options_for_select([['SL', 'SL'], ['CL', 'CL'], ['PL', 'PL'], ['Comp off', 'copm off']]), class:"form-control") %>
+      </div>
+     </div>
+      <div class="form-group">
+       <%= f.label :reason, class:"col-sm-8 control-label" %>
+       <div class="col-sm-10"> 
+      <%= f.text_field :reason, class:"form-control", value:"" %>
+      </div>
+     </div>
+      <div class="form-group">
+       <%= f.label :leaves_from, class:"col-sm-8 control-label" %>
+       <div class="col-sm-10"> 
+      <%= f.text_field :leaves_from, class:"form-control", value:"", :id => 'datepic' %>
+      </div>
+     </div>
+      <div class="form-group">
+       <%= f.label :leaves_to, class:"col-sm-8 control-label" %>
+       <div class="col-sm-10"> 
+      <%= f.text_field :leaves_to, class:"form-control", value:"", :id => 'datepick' %>
+      </div>
+     </div>
+      
+      
+      <div class="form-group">
+        <div class="col-sm-offset-8 col-sm-10">
+          <%= f.submit "Apply for Leave", class:"btn btn-large btn-primary" %>
+        </div>
+      </div>     
+  </form>
+ <% end %>
 </div>
