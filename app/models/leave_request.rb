@@ -29,6 +29,8 @@ class LeaveRequest < ActiveRecord::Base
 
 		@record = LeaveRecord.find_by(@user_id)
 		remaining_leaves = 24 - @record.leaves_taken
+        @record.leaves_taken = @record.leaves_taken + leave_days
+        @record.save
 		
 
 		planned_leaves=LeaveRequest.where(:leave_type => 'PL')
@@ -40,33 +42,32 @@ class LeaveRequest < ActiveRecord::Base
 		
 		
 
-		if leave_type == 'PL' && pl_leaves <= 6
+		if leave_type == 'PL'
 			
 			if leave_applied_gap < 14
-				errors.add(:base, "Sorry not granted, as you should inform 2 weeks earlier!")
-			else
-				errors.add(:base, "Sorry not granted, as you already accessed all your planned leaves!")
+				errors.add(:base, "Sorry not granted, for PL you should inform 2 weeks earlier!")
 			end
 
-			
+			if pl_leaves >= 6
+				errors.add(:base, "Sorry not granted, as you already accessed all your planned leaves!")
+			end
 		end
 
 		
-		 if leave_type == 'CL' && cl_leaves <=5
+		 if leave_type == 'CL'
 		 	
   			if leave_days > 1
-  				errors.add(:base, "Sorry not granted, as only one casual leave can be granted at a time!")
-  			else
+  				errors.add(:base, "Sorry not granted, for CL only one casual leave can be granted at a time!")
+  			end
+
+  			if cl_leaves >=5
   				errors.add(:base, "Sorry not granted, as you already accessed all your casual leaves!")
   			end
   		end
 
-  	  if remaining_leaves < leave_days
-        errors.add(:base, "If you cross deadline of 24 leaves it will be Unpaid plz aware") 
+  	   if remaining_leaves < leave_days
+          errors.add(:base, "If you cross deadline of 24 leaves it will be Unpaid plz aware") 
        end
-
-	end
-
-	
+   end
 end
 
