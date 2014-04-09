@@ -1,17 +1,18 @@
 <div class="jumbotron">
   <h2>Welcome to the Vacation Tool</h2>
-   <%  if user_signed_in? %>
+  <%  if user_signed_in? %>
    	<%#= current_user.inspect %>
    	<% if current_user.manager_id == 0 %>
    	  <p>You have not Assigned any Manager yet <p>
    	<% else %>	
      <p> Manager : <%= current_user.try(:manager).try(:name) || 'Not Available' %> <p>
     <% end %> 	
-   <p> Total Leaves <%= current_user.leave_record.total_leaves %> </p>
-   <p> Leaves Taken <%= current_user.leave_record.leaves_taken %> </p>
-   <% end %>
+        <p> Total Leaves <%= current_user.leave_record.total_leaves %> </p>
+        <p> Leaves Taken <%= current_user.leave_record.leaves_taken %> </p>    
+  <% end %> 
   <p><%= link_to 'New Vacation Request', new_vacation_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
-   <% flash.each do |name, message| %>
-        <%= content_tag :div, message, id: "flash_#{name}"  %>
-      <% end %>
+
+  <% flash.each do |name, message| %>
+    <%= content_tag :div, message, id: "flash_#{name}" %>
+  <% end %>
 </div>

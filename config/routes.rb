@@ -4,6 +4,9 @@ VacationTool::Application.routes.draw do
 
   root to: "vacations#home"
 
+  match '/employee_requests', to: 'vacations#leave_request', via: 'get'
+  match '/employee_list', to: 'vacations#show_emp', via: 'get'
+  
   resources :vacations
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

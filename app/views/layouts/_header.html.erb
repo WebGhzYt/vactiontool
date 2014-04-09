@@ -10,7 +10,14 @@
  
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <p class="navbar-text">Signed in as <%= current_user.name %></p>
+          <% @roles = Role.all %>
+          <% @roles.each do |c| %>
+            <% if c.id == 2 %>
+             <%= link_to "Employee Requests", employee_requests_path, :class => 'navbar-brand'  %>
+             <%= link_to "Employee List", employee_list_path, :class => 'navbar-brand'  %>
+            <% end %> 
+          <% end %>  
+         <p class="navbar-text">Signed in as <%= current_user.name %></p>
           <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-brand'  %>
         <% else %>
           <%= link_to "Sign in with OnGraph ", user_omniauth_authorize_path(:google_oauth2) %>
