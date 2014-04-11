@@ -3,10 +3,9 @@ class User < ActiveRecord::Base
   # validates :provider, presence: true, length: { maximum: 50 }
   # validates :uid, presence: true, length: { maximum: 50 }
   has_and_belongs_to_many :role
-  
+  has_many :leave_requests
   belongs_to :manager, class_name: 'User'
   has_one :leave_record
-  has_many :leave_requests
 
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -27,6 +26,9 @@ class User < ActiveRecord::Base
                            email:    data["email"],
                            uid:      access_token.uid ,
                            password: Devise.friendly_token[0,20],
+                           sl_allowed: 12,
+                           pl_allowed: 6,
+                           cl_allowed: 6,
                            manager_id: 0  )
         
         

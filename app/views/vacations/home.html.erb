@@ -1,18 +1,75 @@
 <div class="jumbotron">
-  <h2>Welcome to the Vacation Tool</h2>
-  <%  if user_signed_in? %>
+  <center>
+  <h2><i><u>Welcome <%= current_user.name %><i></h2></u>
+  </center>
+   <%  if user_signed_in? %>
    	<%#= current_user.inspect %>
    	<% if current_user.manager_id == 0 %>
    	  <p>You have not Assigned any Manager yet <p>
    	<% else %>	
      <p> Manager : <%= current_user.try(:manager).try(:name) || 'Not Available' %> <p>
     <% end %> 	
-        <p> Total Leaves <%= current_user.leave_record.total_leaves %> </p>
-        <p> Leaves Taken <%= current_user.leave_record.leaves_taken %> </p>    
-  <% end %> 
-  <p><%= link_to 'New Vacation Request', new_vacation_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
 
-  <% flash.each do |name, message| %>
-    <%= content_tag :div, message, id: "flash_#{name}" %>
-  <% end %>
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Leave_type</th>
+          <th>Leave_allowed</th>
+          <th>Leave_applied</th>
+          <th>Leave_approved</th>
+          <th>Leaves_remaining</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sick Leaves</td>
+
+          <td><%=current_user.sl_allowed%></td>
+
+          <% @sl_lea = LeaveRequest.where(:leave_type => 'SL')%>
+          <td><%= @sl_lea.count %></td>
+
+          <% @sl_lev_app = @sl_lea.where(:status => 'approved') %>
+          <td><%= @sl_lev_app.count %></td>
+
+          <td><%=current_user.sl_allowed - @sl_lev_app.count %></td>
+        </tr>
+
+        <tr>
+          <td>Casual Leaves</td>
+
+          <td><%=current_user.cl_allowed%></td>
+
+          <% @cl_lea = LeaveRequest.where(:leave_type => 'CL')%>
+          <td><%= @cl_lea.count %></td>
+
+          <% @cl_lev_app = @cl_lea.where(:status => 'approved') %>
+          <td><%= @cl_lev_app.count %></td>
+
+          <td><%=current_user.cl_allowed - @cl_lev_app.count %></td>
+        </tr>
+
+        <tr>
+          <td>Planned Leaves</td>
+
+          <td><%=current_user.pl_allowed%></td>
+
+          <% @pl_lea = LeaveRequest.where(:leave_type => 'PL')%>
+          <td><%= @pl_lea.count %></td>
+
+          <% @pl_lev_app = @pl_lea.where(:status => 'approved') %>
+          <td><%= @pl_lev_app.count %></td>
+          
+          <td><%=current_user.pl_allowed - @pl_lev_app.count %></td>
+        </tr>
+      </tbody>  
+    </table>
+    
+    <center>
+      <p> Total Leaves <%= current_user.leave_record.total_leaves %> </p>
+      <p> Leaves Taken <%= @sl_lev_app.count + @cl_lev_app.count + @pl_lev_app.count %> </p>
+      <p><%= link_to 'Applied for leaves', new_vacation_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
+   </center>
+   <% end %>
+  
 </div>
