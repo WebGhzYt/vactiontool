@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20140401073855) do
   end
 
   create_table "roles", force: true do |t|
-    t.string   "role"
+    t.string   "role_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

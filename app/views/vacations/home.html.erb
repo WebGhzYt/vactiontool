@@ -5,7 +5,7 @@
    <%  if user_signed_in? %>
    	<%#= current_user.inspect %>
    	<% if current_user.manager_id == 0 %>
-   	  <p>You have not Assigned any Manager yet <p>
+   	  <p> You don't have been assigned a Manager yet <p>
    	<% else %>	
      <p> Manager : <%= current_user.try(:manager).try(:name) || 'Not Available' %> <p>
     <% end %> 	
@@ -68,7 +68,7 @@
     <center>
       <p> Total Leaves <%= current_user.leave_record.total_leaves %> </p>
       <p> Leaves Taken <%= @sl_lev_app.count + @cl_lev_app.count + @pl_lev_app.count %> </p>
-      <p><%= link_to 'Applied for leaves', new_vacation_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
+      <p><%= link_to 'Create a Leave Request', new_vacation_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
    </center>
    <% end %>
   
