@@ -27,7 +27,7 @@ class LeaveRequest < ActiveRecord::Base
 		
 
 		leave_days = (leaves_to.to_date - leaves_from.to_date).to_i + 1 
-		
+		self.leave_days = leave_days
 		leave_applied_gap = (leaves_from.to_date - applied_date.to_date).to_i
 		
 		@record = LeaveRecord.find_by(@user_id)
@@ -57,17 +57,23 @@ class LeaveRequest < ActiveRecord::Base
 		end
 
 		
-		 if leave_type == 'CL'
+		if leave_type == 'CL'
 		 	if cl_allowed == cl_leaves
 		 		errors.add(:base, "Sorry not granted, as you already accessed all your casual leaves!")
   			elsif leave_days > 1
   				errors.add(:base, "Sorry not granted, as only one casual leave can be granted at a time!")
    			end
   		end
+
+  		if leave_type == 'SL'
+			if sl_allowed == sl_leaves
+				errors.add(:base, "Sorry not granted, as you already accessed all your sick leaves!")
+			end
+		end
      
         if remaining_leaves < leave_days
           errors.add(:base, "If you cross deadline of 24 leaves it will be Unpaid plz aware") 
-       end
+        end
    end
 end
 

@@ -11,13 +11,14 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <% if current_user.roles.map { |e| e.role_name }.include?("Manager") %>
-            <%= link_to "Employee Requests", employee_requests_path, :class => 'navbar-brand'  %>
-            <%= link_to "Employee List", employee_list_path, :class => 'navbar-brand'  %>
-         <% end %>  
-         <p class="navbar-text">Signed in as <%= current_user.name %></p>
-         <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-brand'  %>
+             <%= link_to "Employee Requests", employee_requests_path, :class => 'navbar-brand'  %>
+             <%= link_to "Employee List", employee_list_path, :class => 'navbar-brand'  %>
+             
+          <% end %>  
+         <div class="navbar-text"><b>Welcome <%= current_user.name %></b></div>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-brand'  %>
         <% else %>
-           <%= link_to "Sign in with OnGraph ", user_omniauth_authorize_path(:google_oauth2) %>
+          <%= link_to "Sign in with OnGraph ", user_omniauth_authorize_path(:google_oauth2) %>
         <% end %>
       </ul>
     </div>

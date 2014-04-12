@@ -1,11 +1,11 @@
-<div class="jumbotron">
+<div class="jumbotron containerwidth">
   <center>
-  <h2><i><u>Welcome <%= current_user.name %><i></h2></u>
+  
   </center>
    <%  if user_signed_in? %>
    	<%#= current_user.inspect %>
    	<% if current_user.manager_id == 0 %>
-   	  <p> You don't have been assigned a Manager yet <p>
+   	  <p>You don't have been assigned a manager yet.<p>
    	<% else %>	
      <p> Manager : <%= current_user.try(:manager).try(:name) || 'Not Available' %> <p>
     <% end %> 	
@@ -15,7 +15,7 @@
         <tr>
           <th>Leave_type</th>
           <th>Leave_allowed</th>
-          <th>Leave_applied</th>
+          <th>Leave_requested</th>
           <th>Leave_approved</th>
           <th>Leaves_remaining</th>
         </tr>
@@ -26,13 +26,24 @@
 
           <td><%=current_user.sl_allowed%></td>
 
-          <% @sl_lea = LeaveRequest.where(:leave_type => 'SL')%>
-          <td><%= @sl_lea.count %></td>
+          <% @current_user_requests = LeaveRequest.where(:user_id => current_user.id) %>
+          <% @current_user_sl = @current_user_requests.where(:leave_type => 'SL') %>
+          <% @sl_requested_days_count = 0 %>
+          <% @current_user_sl.each do |c| %>
+            <% @sl_requested_days_count = @sl_requested_days_count + c.leave_days %>
+          <%end%>
 
-          <% @sl_lev_app = @sl_lea.where(:status => 'approved') %>
-          <td><%= @sl_lev_app.count %></td>
+          <td><%= @sl_requested_days_count %></td>
 
-          <td><%=current_user.sl_allowed - @sl_lev_app.count %></td>
+          <% @sl_lev_approved = @current_user_sl.where(:status => 'approved') %>
+          <% @sl_approved_days_count = 0 %>
+          <% @sl_lev_approved.each do |c| %>
+            <% @sl_approved_days_count = @sl_approved_days_count + c.leave_days %>
+          <%end%>
+
+          <td><%= @sl_approved_days_count %></td>
+
+          <td><%=current_user.sl_allowed - @sl_requested_days_count - @sl_approved_days_count %></td>
         </tr>
 
         <tr>
@@ -40,35 +51,61 @@
 
           <td><%=current_user.cl_allowed%></td>
 
-          <% @cl_lea = LeaveRequest.where(:leave_type => 'CL')%>
-          <td><%= @cl_lea.count %></td>
+          <%# @current_user_requests = LeaveRequest.where(:user_id => current_user.id) %>
+          <% @current_user_cl = @current_user_requests.where(:leave_type => 'CL') %>
+          <% @cl_requested_days_count = 0 %>
+          <% @current_user_cl.each do |c| %>
+            <% @cl_requested_days_count = @cl_requested_days_count + c.leave_days %>
+          <%end%>
 
-          <% @cl_lev_app = @cl_lea.where(:status => 'approved') %>
-          <td><%= @cl_lev_app.count %></td>
+          <td><%= @cl_requested_days_count %></td>
 
-          <td><%=current_user.cl_allowed - @cl_lev_app.count %></td>
+          <% @cl_lev_approved = @current_user_cl.where(:status => 'approved') %>
+          <% @cl_approved_days_count = 0 %>
+          <% @cl_lev_approved.each do |c| %>
+            <% @cl_approved_days_count = @cl_approved_days_count + c.leave_days %>
+          <%end%>
+
+          <td><%= @cl_approved_days_count %></td>
+
+          <td><%=current_user.cl_allowed - @cl_requested_days_count - @cl_approved_days_count %></td>
         </tr>
 
         <tr>
+
           <td>Planned Leaves</td>
 
           <td><%=current_user.pl_allowed%></td>
 
-          <% @pl_lea = LeaveRequest.where(:leave_type => 'PL')%>
-          <td><%= @pl_lea.count %></td>
+          <%# @current_user_requests = LeaveRequest.where(:user_id => current_user.id) %>
+          <% @current_user_pl = @current_user_requests.where(:leave_type => 'PL') %>
+          <% @pl_requested_days_count = 0 %>
+          <% @current_user_pl.each do |c| %>
+            <% @pl_requested_days_count = @pl_requested_days_count + c.leave_days %>
+          <%end%>
 
-          <% @pl_lev_app = @pl_lea.where(:status => 'approved') %>
-          <td><%= @pl_lev_app.count %></td>
-          
-          <td><%=current_user.pl_allowed - @pl_lev_app.count %></td>
+          <td><%= @pl_requested_days_count %></td>
+
+          <% @pl_lev_approved = @current_user_pl.where(:status => 'approved') %>
+          <% @pl_approved_days_count = 0 %>
+          <% @pl_lev_approved.each do |c| %>
+            <% @pl_approved_days_count = @pl_approved_days_count + c.leave_days %>
+          <%end%>
+
+          <td><%= @pl_approved_days_count %></td>
+
+          <td><%=current_user.pl_allowed - @pl_requested_days_count - @pl_approved_days_count %></td>
         </tr>
+
+        <tr>
+
       </tbody>  
     </table>
     
     <center>
       <p> Total Leaves <%= current_user.leave_record.total_leaves %> </p>
-      <p> Leaves Taken <%= @sl_lev_app.count + @cl_lev_app.count + @pl_lev_app.count %> </p>
-      <p><%= link_to 'Create a Leave Request', new_vacation_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
+      <p> Leaves Taken <%= @sl_approved_days_count + @cl_approved_days_count + @pl_approved_days_count %> </p>
+      <p><%= link_to 'Create a leave request', new_vacation_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
    </center>
    <% end %>
   
