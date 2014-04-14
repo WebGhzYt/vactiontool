@@ -4,6 +4,12 @@
   </center>
    <%  if user_signed_in? %>
    	<%#= current_user.inspect %>
+    <% if flash[:notice] %>
+      <div class="notice alert alert-success"><%= flash[:notice] %></div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert alert-warning"><%= flash[:alert] %></div>
+    <% end %>
+
    	<% if current_user.manager_id == 0 %>
    	  <p>You don't have been assigned a manager yet.<p>
    	<% else %>	

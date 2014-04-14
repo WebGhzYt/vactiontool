@@ -4,23 +4,39 @@ class VacationsController < ApplicationController
   end
 
  def create
+  #vacation = Vacation.new (params[:vacation])
+    #@vacation = LeaveRequest.new(leave_params)
+    # if @vacation.leave_type != 'SL'
+    #  if @vacation.save  
+    #    flash[:success] = "Leaves form successfully Submit"
+    #    redirect_to root_path 
+    #   else  
+    #     render 'new'
+    #   end
+    # else
+    #   if @vacation.save
+    #     flash[:warning] = "Sick leaves might be need documentation"
+    #    redirect_to root_path
+    #   end   
+    # end
     @vacation = LeaveRequest.new(leave_params)
-    if @vacation.leave_type != 'SL'
-     if @vacation.save  
-       flash[:success] = "Leaves form successfully Submit"
-       redirect_to root_path 
-      else  
-        render 'new'
+    @vacation.user_id = current_user.id
+    @vacation.status = 'pending'
+    @vacation.status_date = Time.now
+    @vacation.applied_date = Time.now
+    if @vacation.save
+      if @vacation.leave_type == 'SL'
+        flash[:alert] = "Successfully submitted , You might need provide Documentation in future if required!"
+      else
+        flash[:notice] = "Leave Request successfully submitted."
       end
+      redirect_to root_path
     else
-      if @vacation.save
-        flash[:warning] = "Sick leaves might be need documentation"
-       redirect_to root_path
-      end   
+      render 'new'
     end
   end
 
- def index
+  def index
     @vacations = LeaveRequest.all
   end   
 
@@ -38,6 +54,6 @@ class VacationsController < ApplicationController
 
   private
   def leave_params
-    params.require(:leave_request).permit(:applied_date, :leave_type, :reason, :leaves_from, :leaves_to, :status, :status_date, :user_id)
+    params.require(:leave_request).permit(:leave_type, :reason, :leaves_from, :leaves_to)
   end
 end

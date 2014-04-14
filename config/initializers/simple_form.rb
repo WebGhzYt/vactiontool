@@ -142,4 +142,6 @@ SimpleForm.setup do |config|
 
   # Default class for inputs
   # config.input_class = nil
+  config.form_class = "simple_form form-horizontal"
+  
 end
