@@ -42,10 +42,12 @@ class LeaveRequest < ActiveRecord::Base
 			end
 
 			@record = LeaveRecord.find_by(@user_id)
-			remaining_leaves = 24 - @record.leaves_taken
+			if @record
+				remaining_leaves = 24 - @record.leaves_taken
 
-			if remaining_leaves < leave_days
-          		errors.add(:base, "Not permitted as you are left with less remaining leaves.") 
+				if remaining_leaves < leave_days
+          			errors.add(:base, "Not permitted as you are left with less remaining leaves.") 
+        		end
         	end
 		end
 
@@ -107,7 +109,7 @@ class LeaveRequest < ActiveRecord::Base
 		# 	errors.add(:base, "Invalid date request!")
 		# end
 
-		if leave_type == 'PL'
+		if leave_type == 'PL' && pl_allowed
 			if i > pl_allowed
 				errors.add(:base, "Sorry not granted, as you already accessed all your planned leaves!")
 			end
@@ -119,7 +121,7 @@ class LeaveRequest < ActiveRecord::Base
 		end
 
 		
-		if leave_type == 'CL'
+		if leave_type == 'CL' && cl_allowed
 		 	if j > cl_allowed
 		 		errors.add(:base, "Sorry not granted, as you already accessed all your casual leaves!")
   			elsif leave_days > 1
@@ -127,7 +129,7 @@ class LeaveRequest < ActiveRecord::Base
    			end
   		end
 
-  		if leave_type == 'SL'
+  		if leave_type == 'SL' && sl_allowed
 			if k > sl_allowed
 				errors.add(:base, "Sorry not granted, as you already accessed all your sick leaves!")
 			end
