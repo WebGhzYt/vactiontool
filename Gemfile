@@ -15,7 +15,8 @@ gem 'omniauth-google-oauth2'
 gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass'
 gem 'simple_form'
-
+gem 'rails_admin'
+gem 'cancan'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

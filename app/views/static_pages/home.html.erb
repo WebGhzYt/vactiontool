@@ -1,0 +1,17 @@
+<h1><center> Vacation Tool </center></h1>
+<h2></h2>
+<center>
+  <% if user_signed_in? %>
+  
+    <%# unless current_user.has_access %>
+        <!-- <p>You have not access to visit the bd-tool.</p>
+        <p>A notification has been sent to Admin.</p> 
+        <p>Please contact Bd-Tool Admin.</p> -->
+    <%# end %>
+  <% else %>
+    <p> Sign in with <strong> Your OnGraph id </strong> here </p>
+    <%= link_to "Sign in with OnGraph", user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-lg btn-primary' %> 
+  <% end %>
+
+
+</center>

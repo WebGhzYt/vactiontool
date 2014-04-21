@@ -1,8 +1,0 @@
-
- <h2> Vacation Tool </h2>
-  <h5> Sign in with Your OnGraph Id here </h5>
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with OnGraph", omniauth_authorize_path(resource_name, provider),:class => "btn btn-primary btn-lg" %><br />
-  <% end -%>
-<% end -%>

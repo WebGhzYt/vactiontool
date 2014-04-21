@@ -2,7 +2,7 @@ class LeaveRequest < ActiveRecord::Base
   	
 
 	belongs_to :user
-	belongs_to :leave_record
+	belongs_to :leave_type
 
 
 	#validates :applied_date, presence: true
@@ -64,11 +64,8 @@ class LeaveRequest < ActiveRecord::Base
 			elsif p.leave_type == 'SL'
 				k = k + p.leave_days
 			end
-			# logger.debug i
-			# logger.debug j
-			# logger.debug k
 		end
-		logger.debug i
+			logger.debug i
 			logger.debug j
 			logger.debug k
 
