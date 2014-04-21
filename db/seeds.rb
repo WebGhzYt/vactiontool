@@ -14,3 +14,13 @@
      role = Role.new(:role_name => index)
      role.save!
   end
+
+  ActiveRecord::Base.connection.execute("TRUNCATE leave_types")
+ ActiveRecord::Base.connection.reset_pk_sequence!('leave_types')
+
+  leave_types = ['SL','CL','PL']
+
+  leave_types.each do |index|
+     leave_type = LeaveType.new(:leave_type => index)
+     leave_type.save!
+  end
