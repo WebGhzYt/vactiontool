@@ -3,7 +3,10 @@ class VacationsController < ApplicationController
          @vacation = LeaveRequest.new
   end
 
- def create
+  def home
+  end
+
+  def create
   #vacation = Vacation.new (params[:vacation])
     #@vacation = LeaveRequest.new(leave_params)
     # if @vacation.leave_type != 'SL'
@@ -25,12 +28,12 @@ class VacationsController < ApplicationController
     @vacation.status_date = Time.now
     @vacation.applied_date = Time.now
     if @vacation.save
-      if @vacation.leave_type == 'SL'
+      if @vacation.leave_type_id == '1'
         flash[:alert] = "Successfully submitted , You might need provide Documentation in future if required!"
       else
         flash[:notice] = "Leave Request successfully submitted."
       end
-      redirect_to root_path
+      redirect_to vacations_home_path
     else
       render 'new'
     end
@@ -54,6 +57,6 @@ class VacationsController < ApplicationController
 
   private
   def leave_params
-    params.require(:leave_request).permit(:leave_type, :reason, :leaves_from, :leaves_to)
+    params.require(:leave_request).permit(:leave_type_id, :reason, :leaves_from, :leaves_to)
   end
 end

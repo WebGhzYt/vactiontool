@@ -7,12 +7,15 @@ VacationTool::Application.routes.draw do
   # get '/users/sign_up', to: redirect('/')
   # get '/users/sign_in', to: redirect('/')
 
-  match '/vacations_home', to: 'vacations#home', via: 'get'
+  # match '/vacations/home', to: 'vacations#home', via: 'get'
+  get "vacations/home"
+
   match '/employee_requests', to: 'vacations#leave_request', via: 'get'
   match '/employee_list', to: 'vacations#show_emp', via: 'get'
+
   root "static_pages#home"
   
-  #resources :vacations
+  resources :vacations
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
 
   def check_has_access
     if self.has_access == true
-      leave_record = LeaveRecord.find_by(:id => self.id)
-      #LeaveType.each do |leave_type|
+      leave_record = LeaveRecord.find_by(:user_id => self.id)
+        #LeaveType.each do |leave_type|
         if leave_record.nil?
           leaves = [12,6,6]
           LeaveType.all.each_with_index do |leave_type, index|
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
                              leaves_allowed: leaves[index],
                              leaves_taken: 0
                             )
-            end
+          end
         end
     end
   end
