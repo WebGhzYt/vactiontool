@@ -1,6 +1,6 @@
 class VacationsController < ApplicationController
   def new
-         @vacation = LeaveRequest.new
+    @vacation = LeaveRequest.new
   end
 
   def home
@@ -28,7 +28,7 @@ class VacationsController < ApplicationController
     @vacation.status_date = Time.now
     @vacation.applied_date = Time.now
     if @vacation.save
-      if @vacation.leave_type_id == '1'
+      if @vacation.leave_type.leave_type == 'SL'
         flash[:alert] = "Successfully submitted , You might need provide Documentation in future if required!"
       else
         flash[:notice] = "Leave Request successfully submitted."
