@@ -1,20 +1,15 @@
 VacationTool::Application.routes.draw do
  
-  
+  root "static_pages#home"
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
-  # get '/users/sign_up', to: redirect('/')
-  # get '/users/sign_in', to: redirect('/')
-
-  # match '/vacations/home', to: 'vacations#home', via: 'get'
   get "vacations/home"
-
+  get "static_pages/home"
   match '/employee_requests', to: 'vacations#leave_request', via: 'get'
   match '/employee_list', to: 'vacations#show_emp', via: 'get'
 
-  root "static_pages#home"
-  
   resources :vacations
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

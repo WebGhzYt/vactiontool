@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   #before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :check_access, unless: :devise_controller?
 
-  # before_filter :authenticate_user!
+  before_filter :authenticate_user!
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 

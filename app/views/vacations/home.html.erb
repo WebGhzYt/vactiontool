@@ -13,16 +13,17 @@
     <% end %>   
 
     <table class="table table-striped table-hover table-bordered">
-      <CAPTION><b>Your Record For Leaves</b></CAPTION>
+      
       <thead>
         <tr>
-          <th rowspan="2">Leave Type</th>
-          <th rowspan="2">Leaves Allowed</th>
-          <th rowspan="2">Leaves Approved</th>
-          <th rowspan="2">Leaves Remaining</th>
+          <th rowspan="2"> Leave Type</th>
+          <th rowspan="2"> Leaves Allowed</th>
+          <th colspan="2"> Leaves Records</th>
           <th colspan = "2"> Leaves Requested </th>
         </tr>
         <tr>
+          <th>Leaves Approved</th>
+          <th>Leaves Remaining</th>
           <th>Pending</th>
           <th>Unapproved</th>
         </tr>
@@ -95,7 +96,6 @@
           </td>
 
           <td>
-            
             <%= @sl_approved_days_count %>
           </td>
 
