@@ -8,7 +8,8 @@ gem 'rake', '~>10.2.2'
 
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-google-oauth2'
+#gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '0.2.2'
 #gem 'protected_attributes'
 
 # Use SCSS for stylesheets
