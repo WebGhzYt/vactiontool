@@ -7,8 +7,8 @@ VacationTool::Application.routes.draw do
 
   get "vacations/home"
   get "static_pages/home"
-  match '/employee_requests', to: 'vacations#leave_request', via: 'get'
-  match '/employee_list', to: 'vacations#show_emp', via: 'get'
+  match '/employees_requests', to: 'vacations#leave_request', via: 'get'
+  match '/employees_list', to: 'vacations#show_all_emp', via: 'get'
 
   resources :vacations
   # The priority is based upon order of creation: first created -> highest priority.

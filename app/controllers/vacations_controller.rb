@@ -43,16 +43,20 @@ class VacationsController < ApplicationController
     @vacations = LeaveRequest.all
   end   
 
- def show_emp
-   @emp = User.where(:manager_id => current_user.id)
+  def show_all_emp
+    #@user = User.find_by(params[:id])
+    @emp = User.where(:manager_id => current_user.id)
   end
 
- def leave_request
-   #@emp_requests = User.where(:manager_id => current_user.id) && LeaveRequest.where(:status => 'pending')
-   @emp_requests = User.where(:manager_id => current_user.id)
-   #@emp_requests_id = @emp_requests.where(:status => 'pending')
-   @emp_requests_id = LeaveRequest.where(:status => 'pending')
+  def show
+    @employee_record = User.find(params[:id])
+  end
 
+  def leave_request
+    @employ = LeaveRequest.find_by(params[:id])
+    @user = User.find_by(params[:id])
+    @emp_requests = User.where(:manager_id => current_user.id) && LeaveRequest.where(:status => 'pending')
+   #@emp_requests = LeaveRequest.where("manager_id = ? AND status = ?", current_user.id, 'pending')
  end 
 
   private
