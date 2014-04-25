@@ -6,11 +6,7 @@
       <div class="alert alert alert-warning"><%= flash[:alert] %></div>
     <% end %>
 
-    <% if current_user.manager_id == 0 %>
-      <p>You don't have been assigned a manager yet.<p>
-    <% else %>  
-     <p> Manager : <%=User.find(current_user.manager_id).name %> </p>
-    <% end %>   
+    <p>Manager : <%= current_user.manager.nil? ? "You don't have been assigned a manager yet." : current_user.manager.name %></p>
 
     <table class="table table-striped table-hover table-bordered">
       
