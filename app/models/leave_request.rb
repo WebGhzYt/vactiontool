@@ -28,7 +28,7 @@ class LeaveRequest < ActiveRecord::Base
 			leave_applied_gap = (leaves_from.to_date - applied_date.to_date).to_i
 
 			if leaves_from.to_date > leaves_to.to_date 
-				errors.add(:base, "Invalid date as leave_from must be before leaves_to !!")
+				errors.add(:base, "Invalid date as Leaves_From must be before Leaves_To !!")
 			end
 
 			if applied_date.to_date > leaves_from.to_date
@@ -48,14 +48,13 @@ class LeaveRequest < ActiveRecord::Base
 
       @all_leave_requests = LeaveRequest.where(:user_id => user_id)
       
-      
-      @all_leave_requests.each do |r|
-        if r.leave_type_id == 1 && r.status == 'pending' || r.leave_type_id == 1 && r.status == 'approved'
-          sl_requests = sl_requests + r.leave_days
-        elsif r.leave_type_id == 2 && r.status == 'pending' || r.leave_type_id == 2 && r.status == 'approved'
-          cl_requests = cl_requests + r.leave_days
-        elsif r.leave_type_id == 3 && r.status == 'pending' || r.leave_type_id == 3 && r.status == 'approved'
-          pl_requests = pl_requests + r.leave_days
+      @all_leave_requests.each do |req|
+        if req.leave_type_id == 1 && req.status == 'pending' || req.leave_type_id == 1 && req.status == 'approved'
+          sl_requests = sl_requests + req.leave_days
+        elsif req.leave_type_id == 2 && req.status == 'pending' || req.leave_type_id == 2 && req.status == 'approved'
+          cl_requests = cl_requests + req.leave_days
+        elsif req.leave_type_id == 3 && req.status == 'pending' || req.leave_type_id == 3 && req.status == 'approved'
+          pl_requests = pl_requests + req.leave_days
         end
       end
 

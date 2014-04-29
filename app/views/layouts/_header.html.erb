@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-inverse" role="navigation">
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
   <div class="navbar-header">
     <div class= "container">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -6,22 +6,29 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'Vacation Tool', root_path, :class => "navbar-brand" %>
+      <%= link_to 'Vacation Tool', root_path, :class => "navbar-brand" ,"data-no-turbolink" => true %>
  
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <% if current_user.roles.map { |e| e.role_name }.include?("Manager") %>
-             <b><%= link_to "Employee Requests", employees_requests_path, :class => 'navbar-text' %>
-             <%= link_to "Employee List", employees_list_path, :class => 'navbar-text' %>    
-          <% end %>  
+          <div class="navbar-text" style="font-size:14px; color:#538b01; font-weight:bold; font-style:italic;"><b>Welcome <%= current_user.name %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
-          <%= link_to "Employee Dashboard", vacations_home_path, :class => 'navbar-text' %>
-          <div class="navbar-text"><b>Welcome <%= current_user.name %></div>
-          <b><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-text' %></b>
-
+          <%#= link_to "Dashboard", vacations_home_path, :class => 'navbar-text' %>
+  
           <% if current_user.roles.map { |e| e.role_name }.include?("Admin")%>
-            <%= link_to "Admin", rails_admin_path, :class => 'navbar-text' %></b>
-          <% end %>
+            <%= link_to "Admin", rails_admin_path, :class => 'navbar-text' ,"data-no-turbolink" => true %>
+          <% end %></b>
+
+          <% if current_user.roles.map { |e| e.role_name }.include?("Manager") %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Details </b><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Leaves Requests", leaves_requests_path ,"data-no-turbolink" => true %></li>
+              <li><%= link_to "Employee List", users_path ,"data-no-turbolink" => true %></li>
+            </ul>
+          </li>
+          <%end%>
+          
+          <b><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-text' ,"data-no-turbolink" => true%></b>
         <% end %>
       </ul>
     </div>

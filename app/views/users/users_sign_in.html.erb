@@ -1,0 +1,16 @@
+<div class="jumbotron containerwidth">
+<% if user_signed_in? %>
+  <% unless current_user.has_access %>
+    <center>
+      <p>You can not visit the Vacation_Tool unless Admin granted your access.</p>
+      <p>A notification has been sent to Admin.</p> 
+      <p>Please contact Vacation-Tool Admin.</p>
+    </center>  
+  <% end %>
+<% else %>
+  <center>
+  <p> Sign in with <strong> Your OnGraph Id </strong> here </p>
+    <%= link_to "Sign in with OnGraph", user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-lg btn-primary' %>
+  </center> 
+<% end %>
+</div>

@@ -27,12 +27,23 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    vacations_home_path
+    root_path
+    #vacations_home_path
   end
- 
+  
+  def after_sign_out_path_for(resource)
+    #root_path
+    users_users_sign_in_path
+  end
+
   def check_access
-    unless current_user.has_access
-      redirect_to root_path
+    if user_signed_in?
+      unless current_user.has_access
+        redirect_to "/static_pages/home"
+        #redirect_to root_path
+      end
+    else 
+      users_users_sign_in_path
     end
   end
 

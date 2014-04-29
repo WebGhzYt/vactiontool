@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :leave_requests
   belongs_to :manager, class_name: 'User'
+  has_many :users, class_name: 'User', foreign_key: 'manager_id'
   has_many :leave_records
 
   devise :database_authenticatable, :registerable, :omniauthable,

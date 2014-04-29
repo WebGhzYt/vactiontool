@@ -159,6 +159,6 @@
     <center>
       <p> Total Leaves : <%= @current_user_sl_allowed.first.leaves_allowed + @current_user_cl_allowed.first.leaves_allowed + @current_user_pl_allowed.first.leaves_allowed %> </p>
       <p> Leaves Taken : <%= @sl_approved_days_count + @cl_approved_days_count + @pl_approved_days_count %> </p>
-      <p><%= link_to 'Back', employees_list_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
+      <p><%= link_to 'Back', users_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
    </center>
 </div>
