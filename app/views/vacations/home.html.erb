@@ -35,55 +35,55 @@
             <% @current_user_cl_allowed = @current_user_records.where(:leave_type_id => 2) %>
             <% @current_user_pl_allowed = @current_user_records.where(:leave_type_id => 3) %>
 
-            <% @current_user_sl_approved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 1 ,status: "approved") %>
+            <% @current_user_sl_approved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 1 ,state: "approved") %>
             <% @sl_approved_days_count = 0 %>
               <% @current_user_sl_approved.each do |c| %>
                 <% @sl_approved_days_count = @sl_approved_days_count + c.leave_days %>
               <%end%>
 
-            <% @current_user_cl_approved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 2 ,status: "approved") %>
+            <% @current_user_cl_approved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 2 ,state: "approved") %>
             <% @cl_approved_days_count = 0 %>
               <% @current_user_cl_approved.each do |c| %>
                 <% @cl_approved_days_count = @cl_approved_days_count + c.leave_days %>
               <%end%>
 
-            <% @current_user_pl_approved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 3 ,status: "approved") %>
+            <% @current_user_pl_approved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 3 ,state: "approved") %>
             <% @pl_approved_days_count = 0 %>
               <% @current_user_pl_approved.each do |c| %>
                 <% @pl_approved_days_count = @pl_approved_days_count + c.leave_days %>
               <%end%>  
 
-            <% @current_user_sl_requested = LeaveRequest.where(user_id: current_user.id,leave_type_id: 1 ,status: "pending")%>
+            <% @current_user_sl_requested = LeaveRequest.where(user_id: current_user.id,leave_type_id: 1 ,state: "pending")%>
             <% @sl_requested_days_count = 0 %>
               <% @current_user_sl_requested.each do |c| %>
                 <% @sl_requested_days_count = @sl_requested_days_count + c.leave_days %>
               <%end%>
 
-            <% @current_user_cl_requested = LeaveRequest.where(user_id: current_user.id,leave_type_id: 2 ,status: "pending")%>
+            <% @current_user_cl_requested = LeaveRequest.where(user_id: current_user.id,leave_type_id: 2 ,state: "pending")%>
             <% @cl_requested_days_count = 0 %>
               <% @current_user_cl_requested.each do |c| %>
                 <% @cl_requested_days_count = @cl_requested_days_count + c.leave_days %>
               <%end%>
 
-            <% @current_user_pl_requested = LeaveRequest.where(user_id: current_user.id,leave_type_id: 3 ,status: "pending")%>
+            <% @current_user_pl_requested = LeaveRequest.where(user_id: current_user.id,leave_type_id: 3 ,state: "pending")%>
             <% @pl_requested_days_count = 0 %>
               <% @current_user_pl_requested.each do |c| %>
                 <% @pl_requested_days_count = @pl_requested_days_count + c.leave_days %>
               <%end%>
 
-            <% @current_user_sl_unapproved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 1 ,status: "unapproved")%> 
+            <% @current_user_sl_unapproved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 1 ,state: "unapproved")%> 
             <% @sl_unapproved_days_count = 0 %>
               <% @current_user_sl_unapproved.each do |c| %>
                 <% @sl_unapproved_days_count = @sl_unapproved_days_count + c.leave_days %>
               <%end%>
 
-            <% @current_user_cl_unapproved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 2 ,status: "unapproved")%> 
+            <% @current_user_cl_unapproved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 2 ,state: "unapproved")%> 
             <% @cl_unapproved_days_count = 0 %>
               <% @current_user_cl_unapproved.each do |c| %>
                 <% @cl_unapproved_days_count = @cl_unapproved_days_count + c.leave_days %>
               <%end%>
 
-            <% @current_user_pl_unapproved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 3 ,status: "unapproved")%> 
+            <% @current_user_pl_unapproved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 3 ,state: "unapproved")%> 
             <% @pl_unapproved_days_count = 0 %>
               <% @current_user_pl_unapproved.each do |c| %>
                 <% @pl_unapproved_days_count = @pl_unapproved_days_count + c.leave_days %>

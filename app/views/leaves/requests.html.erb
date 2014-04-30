@@ -14,7 +14,7 @@
       </thead>
       <tbody>
         <tr><% @emp.each do |employee| %>
-              <% leaves = LeaveRequest.where(user_id: employee.id , status: 'pending') %>
+              <% leaves = LeaveRequest.where(user_id: employee.id , state: 'pending') %>
               <% leaves.each do |emp_leave_req| %>
                 <td><%= employee.id %></td>
                 <td><%= employee.name %></td>
@@ -22,7 +22,9 @@
                 <td><%= emp_leave_req.leaves_from.to_date %></td>
                 <td><%= emp_leave_req.leaves_to.to_date %></td>
                 <td><%= emp_leave_req.reason%></td>
-                <td></td>
+                <td><%= link_to 'Approve', approve_leave_path(emp_leave_req) , :class => 'btn btn-success' %> &nbsp;&nbsp;&nbsp;
+                  <%= link_to 'UnApprove', unapprove_leave_path(emp_leave_req) , :class => 'btn btn-danger' %>
+                </td>
         </tr>
         <% end %>
         <% end %>
