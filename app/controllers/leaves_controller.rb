@@ -15,7 +15,7 @@ class LeavesController < ApplicationController
       		else
         		flash[:notice] = "Leave Request successfully submitted."
       		end
-      		redirect_to vacations_home_path
+      		redirect_to root_path
     	else
       		render 'new'
     	end

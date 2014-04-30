@@ -3,6 +3,8 @@
     <table class="table table-bordered table table-hover table table-striped tablewidth">
       <thead>
         <tr>
+          <th>Emp ID</th>
+          <th>Emp Name</th>
           <th>Applied On</th>
           <th>Leave From</th>
           <th>Leave To</th>
@@ -14,6 +16,8 @@
         <tr><% @emp.each do |employee| %>
               <% leaves = LeaveRequest.where(user_id: employee.id , status: 'pending') %>
               <% leaves.each do |emp_leave_req| %>
+                <td><%= employee.id %></td>
+                <td><%= employee.name %></td>
                 <td><%= emp_leave_req.applied_date.to_date %></td>
                 <td><%= emp_leave_req.leaves_from.to_date %></td>
                 <td><%= emp_leave_req.leaves_to.to_date %></td>

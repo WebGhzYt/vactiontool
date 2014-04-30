@@ -1,4 +1,18 @@
 class LeaveRequest < ActiveRecord::Base
+
+	state_machine initial: :pending do
+    	state :pending
+    	state :approved
+    	state :unapproved
+
+    	event :approve  do
+    		transition :pending => :approved
+    	end
+
+    	event :unapprove do
+    		transition :pending => :unapproved
+    	end
+  	end
   	
 	belongs_to :user
 	belongs_to :leave_type
