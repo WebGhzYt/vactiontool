@@ -1,6 +1,7 @@
 class LeaveRecord < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :leave_type
+	has_many :users
 
 	#attr_accessible :user_id, :total_leaves, :leaves_taken
 
