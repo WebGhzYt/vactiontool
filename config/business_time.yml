@@ -1,0 +1,21 @@
+business_time:
+  beginning_of_workday: 9:00 am
+  end_of_workday: 5:00 pm
+  holidays:
+    - Jan 01, 2014
+    - Jan 14, 2014
+    - Jan 26, 2014
+    - March 17th, 2014
+    - April 08th, 2014
+    - April 18th, 2014
+    - August 15th, 2014
+    - October 02nd, 2014
+    - October 03rd, 2014
+    - October 23rd, 2014
+    - December 25th, 2014
+  work_week:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri

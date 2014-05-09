@@ -5,6 +5,7 @@
         <tr>
           <th>Emp ID</th>
           <th>Emp Name</th>
+          <th>Leave Type</th>
           <th>Applied On</th>
           <th>Leave From</th>
           <th>Leave To</th>
@@ -18,6 +19,7 @@
               <% leaves.each do |emp_leave_req| %>
                 <td><%= employee.id %></td>
                 <td><%= employee.name %></td>
+                <td><%= emp_leave_req.leave_type.leave_type %></td>
                 <td><%= emp_leave_req.applied_date.to_date %></td>
                 <td><%= emp_leave_req.leaves_from.to_date %></td>
                 <td><%= emp_leave_req.leaves_to.to_date %></td>

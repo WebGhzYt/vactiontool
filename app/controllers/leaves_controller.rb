@@ -22,9 +22,8 @@ class LeavesController < ApplicationController
           # EmployeeMailer.welcome_user(@leave).deliver
           # format.html { redirect_to(@user, notice: 'Leave Request was successfully created.') }
           # format.json { render json: @user, status: :created, location: @user }
-          logger.debug "7777777777777777777777777"
-          logger.debug @leave.user.manager.name
-          logger.debug @leave.user.manager.email
+ 
+ 
       		redirect_to root_path
     	else
           # format.html { render action: 'new' }
@@ -40,8 +39,20 @@ class LeavesController < ApplicationController
 
   def approve_leave
     @app_leave = LeaveRequest.find(params[:id])
+    @leave_record = LeaveRecord.find_by(user_id: @app_leave.user_id, leave_type_id: @app_leave.leave_type_id)
+
     @app_leave.approve
+
+ 
     
+    @leaves_taken = @leave_record.leaves_taken + @app_leave.leave_days
+
+ 
+
+
+
+    @leave_record.update_attribute(:leaves_taken , @leaves_taken)
+
     EmployeeMailer.leave_approve_confirmation(@app_leave).deliver
     redirect_to leaves_requests_path    
   end
