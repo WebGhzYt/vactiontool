@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
      registered_user = User.where(:email => access_token.info.email).first
       if registered_user
         return registered_user
-      elsif data["email"].include?('@ongraph.com') 
+      elsif data["email"]#.include?('@ongraph.com') 
         user = User.create(name:    data["name"],
                            provider: access_token.provider,
                            email:    data["email"],
