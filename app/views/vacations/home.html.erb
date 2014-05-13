@@ -1,6 +1,5 @@
 <div class="jumbotron containerwidth">
-  
-
+    
     <%  if user_signed_in? %>
       <% if flash[:notice] %>
         <div class="notice alert alert-success"><%= flash[:notice] %></div>
@@ -29,153 +28,43 @@
         <tbody>
           <tr>
             <td>Sick Leaves</td>
-
-            <% @current_user_records = LeaveRecord.where(:user_id => current_user.id) %>
-            <% @current_user_sl_allowed = @current_user_records.where(:leave_type_id => 1) %>
-            <% @current_user_cl_allowed = @current_user_records.where(:leave_type_id => 2) %>
-            <% @current_user_pl_allowed = @current_user_records.where(:leave_type_id => 3) %>
-
-            <% @current_user_sl_approved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 1 ,state: "approved") %>
-            <% @sl_approved_days_count = 0 %>
-              <% @current_user_sl_approved.each do |c| %>
-                <% @sl_approved_days_count = @sl_approved_days_count + c.leave_days %>
-              <%end%>
-
-            <% @current_user_cl_approved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 2 ,state: "approved") %>
-            <% @cl_approved_days_count = 0 %>
-              <% @current_user_cl_approved.each do |c| %>
-                <% @cl_approved_days_count = @cl_approved_days_count + c.leave_days %>
-              <%end%>
-
-            <% @current_user_pl_approved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 3 ,state: "approved") %>
-            <% @pl_approved_days_count = 0 %>
-              <% @current_user_pl_approved.each do |c| %>
-                <% @pl_approved_days_count = @pl_approved_days_count + c.leave_days %>
-              <%end%>  
-
-            <% @current_user_sl_requested = LeaveRequest.where(user_id: current_user.id,leave_type_id: 1 ,state: "pending")%>
-            <% @sl_requested_days_count = 0 %>
-              <% @current_user_sl_requested.each do |c| %>
-                <% @sl_requested_days_count = @sl_requested_days_count + c.leave_days %>
-              <%end%>
-
-            <% @current_user_cl_requested = LeaveRequest.where(user_id: current_user.id,leave_type_id: 2 ,state: "pending")%>
-            <% @cl_requested_days_count = 0 %>
-              <% @current_user_cl_requested.each do |c| %>
-                <% @cl_requested_days_count = @cl_requested_days_count + c.leave_days %>
-              <%end%>
-
-            <% @current_user_pl_requested = LeaveRequest.where(user_id: current_user.id,leave_type_id: 3 ,state: "pending")%>
-            <% @pl_requested_days_count = 0 %>
-              <% @current_user_pl_requested.each do |c| %>
-                <% @pl_requested_days_count = @pl_requested_days_count + c.leave_days %>
-              <%end%>
-
-            <% @current_user_sl_unapproved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 1 ,state: "unapproved")%> 
-            <% @sl_unapproved_days_count = 0 %>
-              <% @current_user_sl_unapproved.each do |c| %>
-                <% @sl_unapproved_days_count = @sl_unapproved_days_count + c.leave_days %>
-              <%end%>
-
-            <% @current_user_cl_unapproved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 2 ,state: "unapproved")%> 
-            <% @cl_unapproved_days_count = 0 %>
-              <% @current_user_cl_unapproved.each do |c| %>
-                <% @cl_unapproved_days_count = @cl_unapproved_days_count + c.leave_days %>
-              <%end%>
-
-            <% @current_user_pl_unapproved = LeaveRequest.where(user_id: current_user.id,leave_type_id: 3 ,state: "unapproved")%> 
-            <% @pl_unapproved_days_count = 0 %>
-              <% @current_user_pl_unapproved.each do |c| %>
-                <% @pl_unapproved_days_count = @pl_unapproved_days_count + c.leave_days %>
-              <%end%>
-
-            <td>
-              <%= @current_user_sl_allowed.first.leaves_allowed %>
-            </td>
-
-            <td>
-              <%= @sl_approved_days_count %>
-            </td>
-
-            <td>
-              <%=@current_user_sl_allowed.first.leaves_allowed -  @sl_requested_days_count -  @sl_approved_days_count %>
-            </td>
-
-            <td>
-              <%= @sl_requested_days_count %>
-            </td>
-
-            <td>
-              <%= @sl_unapproved_days_count %>
-            </td>
-
+            <td><%= current_user.sl_records.leaves_allowed%></td>
+            <td><%= current_user.sl_approved_requests %></td>
+            <td><%= current_user.sl_records.leaves_allowed - current_user.sl_approved_requests - current_user.sl_pending_requests %></td>
+            <td><%= current_user.sl_pending_requests %></td>
+            <td><%= current_user.sl_unapproved_requests %></td>
           </tr>
 
           <tr>
             <td>Casual Leaves</td>
-
-            <td>
-              <%= @current_user_cl_allowed.first.leaves_allowed %>
-            </td>
-
-            <td>
-              <%= @cl_approved_days_count %>
-            </td>
-
-            <td>
-              <%=@current_user_cl_allowed.first.leaves_allowed -  @cl_requested_days_count -  @cl_approved_days_count %>
-            </td>
-
-            <td>
-              <%= @cl_requested_days_count %>
-            </td>
-
-            <td>
-              <%= @cl_unapproved_days_count %>
-            </td>
-
+            <td><%= current_user.cl_records.leaves_allowed %></td>
+            <td><%= current_user.cl_approved_requests %></td>
+            <td><%= current_user.cl_records.leaves_allowed - current_user.cl_approved_requests - current_user.cl_pending_requests %></td>
+            <td><%= current_user.cl_pending_requests %></td>
+            <td><%= current_user.cl_unapproved_requests %></td>
           </tr>
 
           <tr>
             <td>Planned Leaves</td>
-
-            <td>
-              <%= @current_user_pl_allowed.first.leaves_allowed %>
-            </td>
-
-            <td>
-              <%= @pl_approved_days_count %>
-            </td>
-
-            <td>
-              <%=@current_user_pl_allowed.first.leaves_allowed -  @pl_requested_days_count -  @pl_approved_days_count %>
-            </td>
-
-            <td>
-              <%= @pl_requested_days_count %>
-            </td>
-
-            <td>
-              <%= @pl_unapproved_days_count %>
-            </td>
-
+            <td><%= current_user.pl_records.leaves_allowed %></td>
+            <td><%= current_user.pl_approved_requests %></td>
+            <td><%= current_user.pl_records.leaves_allowed - current_user.pl_approved_requests - current_user.pl_pending_requests %></td>
+            <td><%= current_user.pl_pending_requests %></td>
+            <td><%= current_user.pl_unapproved_requests %></td>
           </tr>
         </tbody>
       </table>
 
       <center>
-        <p> Total Leaves : <%= @current_user_sl_allowed.first.leaves_allowed + @current_user_cl_allowed.first.leaves_allowed + @current_user_pl_allowed.first.leaves_allowed %> </p>
-        <p> Leaves Taken : <%= @sl_approved_days_count + @cl_approved_days_count + @pl_approved_days_count %> </p>
-        
-          <p><%= link_to 'Create a leave request', leaves_requests_new_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
-        
-     </center>
-
+            <p> Total Leaves : <%= current_user.sl_records.leaves_allowed + current_user.cl_records.leaves_allowed + current_user.pl_records.leaves_allowed %> </p>
+            <p> Leaves Taken : <%= current_user.sl_records.leaves_taken + current_user.cl_records.leaves_taken + current_user.pl_records.leaves_taken %> </p>
+      </center>
 
     <% else %>
-    <center>
-      <p> Sign in with <strong> Your OnGraph id </strong> here </p>
-    <%= link_to "Sign in with OnGraph", user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-lg btn-primary' ,"data-no-turbolink" => true %> </center>
+      <center>
+        <h2><center> Vacation Tool </center></h2><br/>
+        <p> Sign in with <strong> Your OnGraph id </strong> here </p>
+      <%= link_to "Sign in with OnGraph", user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-lg btn-primary' ,"data-no-turbolink" => true %> </center>
     <%end%>
 
 </div>

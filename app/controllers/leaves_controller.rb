@@ -6,7 +6,6 @@ class LeavesController < ApplicationController
 	def create
 		  @leave = LeaveRequest.new(leave_params)
     	@leave.user_id = current_user.id
-    	#@leave.status = 'pending'
     	@leave.status_date = Time.now
     	@leave.applied_date = Time.now
 
@@ -19,37 +18,27 @@ class LeavesController < ApplicationController
       		else
         		flash[:notice] = "Leave Request successfully submitted."
       		end
-          # EmployeeMailer.welcome_user(@leave).deliver
-          # format.html { redirect_to(@user, notice: 'Leave Request was successfully created.') }
-          # format.json { render json: @user, status: :created, location: @user }
- 
- 
       		redirect_to root_path
     	else
           # format.html { render action: 'new' }
           # format.json { render json: @user.errors, status: :unprocessable_entity }
       		render 'new'
     	end
-
 	end
 
 	def requests
-		@emp = User.where(:manager_id => current_user.id)
+    emp_requests = User.new
+		@emp = emp_requests.employee_requests(current_user.id)
 	end
 
   def approve_leave
-    @app_leave = LeaveRequest.find(params[:id])
+    leave_request = LeaveRequest.new
+    @app_leave = leave_request.find_by_id(params[:id])
     @leave_record = LeaveRecord.find_by(user_id: @app_leave.user_id, leave_type_id: @app_leave.leave_type_id)
 
     @app_leave.approve
-
- 
     
     @leaves_taken = @leave_record.leaves_taken + @app_leave.leave_days
-
- 
-
-
 
     @leave_record.update_attribute(:leaves_taken , @leaves_taken)
 
@@ -58,9 +47,10 @@ class LeavesController < ApplicationController
   end
 
   def unapprove_leave
-    @unapp_leave = LeaveRequest.find(params[:id])
+    leave_request = LeaveRequest.new
+    @unapp_leave = leave_request.find_by_id(params[:id])
     @unapp_leave.unapprove
-    
+    logger.debug @unapp_leave.inspect
     EmployeeMailer.leave_unapprove_confirmation(@unapp_leave).deliver
     redirect_to leaves_requests_path
   end

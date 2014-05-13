@@ -1,13 +1,13 @@
 class LeaveRecord < ActiveRecord::Base
-	belongs_to :user
-	belongs_to :leave_type
-	has_many :users
+  belongs_to :user
+  belongs_to :leave_type
+  
 
-	#attr_accessible :user_id, :total_leaves, :leaves_taken
-
-	# validates :user_id, presence: true
-	# validates :total_leaves, presence: true
-	# validates :leaves_taken, presence: true
+ 
+  def emp_details(user_id)
+    LeaveRecord.where(:user_id => user_id)
+  end
+  
 end 
    
 

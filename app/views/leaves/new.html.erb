@@ -5,32 +5,32 @@
 		<center><h2 class="pageTitle ">Leaves Request Form</h2></center>
 	</div>
   <br/><br/>
-   <%= simple_form_for @leave, html: {class: 'form-horizontal' }, url: leaves_path do |f| %>
-   <%#= f.hidden_field :user_id, :value => current_user.id%>
-   <%#= f.hidden_field :status, :value => 'pending'%>
-   <%#= f.hidden_field :applied_date, :value => Time.now%>
-   <%#= f.hidden_field :status_date, :value => ''%>
+  <%= simple_form_for @leave, html: {class: 'form-horizontal' }, url: leaves_path do |f| %>
+   
     <%= render 'shared/error_messages', object: f.object %>
     
       <div class="form-group">
         <%= f.input :leave_type do %>
-        <%= f.collection_select(:leave_type_id , LeaveType.all, :id, :leave_type) %>
-        <%#= f.select :leave_type, options_for_select([['Sick Leave', 'SL'], ['Casual Leave', 'CL'], ['Planned Leave', 'PL']], @vacation.leave_type), class:"col-sm-2 control-label",  :include_blank => "" %>
-         <% end %>     
+          <%= f.collection_select(:leave_type_id , LeaveType.all, :id, :leave_type) %>
+        <% end %>     
       </div>
+
       <div class="form-group">
         <%= f.input :reason, as: :text, :input_html => { class: 'test'} %>
       </div>
+
       <div class="form-group"> 
         <%= f.input :leaves_from, :as=> 'string' ,:label => 'leaves_from', input_html: { class: 'datepicker'} %>
       </div>
+
       <div class="form-group">  
         <%= f.input :leaves_to, :as=> 'string' ,:label => 'leaves_to', input_html: { class: 'datepicker' } %>
       </div>
+
       <div class="form-group">
         <%= f.button :submit, class: "btn btn-large btn-primary" %> &nbsp; &nbsp;
         <%= link_to "Cancel", root_path, class: "btn btn-large btn-primary" ,"data-no-turbolink" => true %>
       </div>
-    <% end %>
+  <% end %>
 </div>     
       

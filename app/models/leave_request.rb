@@ -24,6 +24,10 @@ class LeaveRequest < ActiveRecord::Base
     
     validate :leave_request
 
+    def find_by_id(id)
+      LeaveRequest.find(id)
+    end
+
     def leave_request
         
         leave_type = self.leave_type.leave_type
@@ -75,17 +79,17 @@ class LeaveRequest < ActiveRecord::Base
             cl_requests = 0
             pl_requests = 0
 
-      @all_leave_requests = LeaveRequest.where(:user_id => user_id)
-      
-      @all_leave_requests.each do |req|
-        if req.leave_type_id == 1 && req.status == 'pending' || req.leave_type_id == 1 && req.status == 'approved'
-          sl_requests = sl_requests + req.leave_days
-        elsif req.leave_type_id == 2 && req.status == 'pending' || req.leave_type_id == 2 && req.status == 'approved'
-          cl_requests = cl_requests + req.leave_days
-        elsif req.leave_type_id == 3 && req.status == 'pending' || req.leave_type_id == 3 && req.status == 'approved'
-          pl_requests = pl_requests + req.leave_days
-        end
-      end
+            @all_leave_requests = LeaveRequest.where(:user_id => user_id)
+            
+            @all_leave_requests.each do |req|
+                if req.leave_type_id == 1 && req.state == 'pending' || req.leave_type_id == 1 && req.state == 'approved'
+                    sl_requests = sl_requests + req.leave_days
+                elsif req.leave_type_id == 2 && req.state == 'pending' || req.leave_type_id == 2 && req.state == 'approved'
+                    cl_requests = cl_requests + req.leave_days
+                elsif req.leave_type_id == 3 && req.state == 'pending' || req.leave_type_id == 3 && req.state == 'approved'
+                    pl_requests = pl_requests + req.leave_days
+                end
+            end
 
      
             if @sl_allowed.first.leaves_allowed && leave_type == 'SL'

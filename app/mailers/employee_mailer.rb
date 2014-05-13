@@ -9,20 +9,13 @@ class EmployeeMailer < ActionMailer::Base
   def leave_approve_confirmation(app_leave)
     @app_leave = app_leave
     emails = [@app_leave.user.email , @app_leave.user.manager.email]
-    #emails.each_with_index do |send_email, index|
-      mail(to: emails, subject: "Leave Approved")
-    #end
-    # mail(to: @app_leave.user.email, subject: "Leave Approved!")
-    # mail(to: @app_leave.user.manager.email, subject: "Leave Granted!")
+    mail(to: emails, subject: "Leave Approved")
   end
 
   def leave_unapprove_confirmation(unapp_leave)
     @unapp_leave = unapp_leave
     emails = [@unapp_leave.user.email , @unapp_leave.user.manager.email]
-    # emails.each_with_index do |send_email, index|
-      mail(to: emails, subject: "Leave Unapproved")
-    # end
-    # mail(to: @unapp_leave.user.email,@unapp_leave.manager.email , subject: "Leave Approved!")
+    mail(to: emails, subject: "Leave Unapproved")
   end
 
 end
