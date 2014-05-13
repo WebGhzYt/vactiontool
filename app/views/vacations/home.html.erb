@@ -58,6 +58,7 @@
       <center>
             <p> Total Leaves : <%= current_user.sl_records.leaves_allowed + current_user.cl_records.leaves_allowed + current_user.pl_records.leaves_allowed %> </p>
             <p> Leaves Taken : <%= current_user.sl_records.leaves_taken + current_user.cl_records.leaves_taken + current_user.pl_records.leaves_taken %> </p>
+            <p><%= link_to 'Create a leave request', leaves_requests_new_path, :class => 'btn btn-success btn-lg bt',"data-no-turbolink" => true %></p>
       </center>
 
     <% else %>
