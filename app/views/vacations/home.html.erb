@@ -1,10 +1,14 @@
 <div class="jumbotron containerwidth">
     
     <%  if user_signed_in? %>
-      <% if flash[:notice] %>
-        <div class="notice alert alert-success"><%= flash[:notice] %></div>
+      <% if flash[:success] %>
+        <div class="notice alert alert-success"><%= flash[:success] %></div>
       <% elsif flash[:alert] %>
         <div class="alert alert alert-warning"><%= flash[:alert] %></div>
+      <% end %>
+
+      <% if flash[:notice] %>
+        <div class="alert alert-info"><%= flash[:notice] %></div>
       <% end %>
 
       <p>Manager : <%= current_user.manager.nil? ? "You don't have been assigned a manager yet." : current_user.manager.name %></p>

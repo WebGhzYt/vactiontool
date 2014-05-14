@@ -13,9 +13,7 @@ VacationTool::Application.routes.draw do
   get 'leaves/:id/unapprove_leave' => 'leaves#unapprove_leave' , :as => 'unapprove_leave'
   match 'leaves/requests', to: 'leaves#requests', via: 'get'
   match 'leaves/requests/new', to: 'leaves#new' , via: 'get'
-  # match '/employees_requests', to: 'vacations#leave_request', via: 'get'
-  match '/employees_list', to: 'vacations#show_all_emp', via: 'get'
-
+  
   resources :vacations
   resources :users
   resources :leaves
