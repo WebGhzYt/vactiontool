@@ -60,6 +60,6 @@ class LeavesController < ApplicationController
 
 	private
   		def leave_params
-    		params.require(:leave_request).permit(:leave_type_id, :reason, :leaves_from, :leaves_to)
+    		params.require(:leave_request).permit(:leave_type_id, :reason, :leaves_from, :leaves_to, :avtar)
   		end
 end

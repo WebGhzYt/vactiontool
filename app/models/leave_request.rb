@@ -1,5 +1,7 @@
 class LeaveRequest < ActiveRecord::Base
 
+    mount_uploader :avtar, AvatarUploader
+
     state_machine initial: :pending do
         state :pending
         state :approved

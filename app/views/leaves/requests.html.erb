@@ -10,6 +10,7 @@
           <th>Leave From</th>
           <th>Leave To</th>
           <th>Reason</th>
+          <th>Documents</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -25,6 +26,7 @@
                   <td><%= emp_leave_req.leaves_from.to_date %></td>
                   <td><%= emp_leave_req.leaves_to.to_date %></td>
                   <td><%= emp_leave_req.reason%></td>
+                  <td><%= image_tag(emp_leave_req.avtar_url, :width => 150, :height => 120) if emp_leave_req.avtar.present? %></td>
                   <td><%= link_to 'Approve', approve_leave_path(emp_leave_req) , :class => 'btn btn-success' %> &nbsp;&nbsp;&nbsp;
                     <%= link_to 'UnApprove', unapprove_leave_path(emp_leave_req) , :class => 'btn btn-danger' %>
                   </td>
