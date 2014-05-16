@@ -68,8 +68,8 @@
     <% else %>
       <center>
         <h2><center> Vacation Tool </center></h2><br/>
-        <p> Sign in with <strong> Your OnGraph id </strong> here </p>
-      <%= link_to "Sign in with OnGraph", user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-lg btn-primary' ,"data-no-turbolink" => true %> </center>
+        <p> Sign in with <strong> Your OnGraph Id </strong> or <strong> Google Account </strong> here </p>
+      <%= link_to "Sign in with OnGraph / Google", user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-lg btn-primary' ,"data-no-turbolink" => true %> </center>
     <%end%>
 
 </div>

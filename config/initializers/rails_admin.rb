@@ -31,4 +31,34 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model 'Role' do
+    object_label_method do
+      :custom_label_method
+    end
+  end
+
+  def custom_label_method
+    "#{role_name}"
+  end
+
+  config.model 'LeaveRequest' do
+    object_label_method do
+      :custom_request_method
+    end
+  end
+
+  def custom_request_method
+    "#{user.name}"
+  end
+
+  config.model 'LeaveRecord' do
+    object_label_method do
+      :custom_record_method
+    end
+  end
+
+  def custom_record_method
+    "#{user.name}"
+  end
 end
