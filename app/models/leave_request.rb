@@ -46,6 +46,7 @@ class LeaveRequest < ActiveRecord::Base
 
             leave_days = 0
             $check = false
+            
             temp_leaves_from = leaves_from
 
             while (temp_leaves_from <= leaves_to)
@@ -56,8 +57,15 @@ class LeaveRequest < ActiveRecord::Base
               end
               temp_leaves_from += 1.day
             end
-
-            logger.debug leave_days
+            
+            temp_leaves_from = leaves_from
+            
+            while (temp_leaves_from <= leaves_to)
+              if temp_leaves_from.to_date.holiday?
+                leave_days = leave_days - 1
+              end
+              temp_leaves_from += 1.day
+            end
 
             # leave_days = (leaves_to.to_date - leaves_from.to_date).to_i + 1 
             self.leave_days = leave_days

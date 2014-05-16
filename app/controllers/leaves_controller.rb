@@ -12,11 +12,11 @@ class LeavesController < ApplicationController
     	if @leave.save
           EmployeeMailer.leave_request(@leave).deliver
           if $check
-            flash[:notice] = "Saturday/Sunday excluded from your leave request."
+            flash[:notice] = "Saturday/Sunday and Official holidays are excluded from your leave request."
           end
           # format.html { redirect_to(@leave, notice: 'Leave Request was successfully created.') }
           # format.json { render json: @leave, status: :created, location: @user }
-      		if @leave.leave_type.leave_type == 'SL'
+      		if @leave.leave_type.leave_type == 'SL' && ( @leave.avtar.nil? || @leave.avtar.blank? )
         		flash[:alert] = "Successfully submitted , You might need provide Documentation in future if required!"
       		else
         		flash[:success] = "Leave Request successfully submitted."
