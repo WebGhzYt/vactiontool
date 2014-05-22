@@ -13,7 +13,8 @@
       <% value.each do |k,v| %>
       <tr>
         <td><%= k[:name] %></td>
-        <td><%= k[:mday] %> / <%= key %> / <%= Time.now.year %></td>
+        <% as = "#{k[:mday]}/#{key}/#{Time.now.year}".to_date %>
+        <td><%= k[:mday] %> <%= as.strftime("%B") %> <%= Time.now.year %> </td>
       </tr>  
     </tbody>
       <% end %>
