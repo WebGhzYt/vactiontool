@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-     if user.roles.map { |role| role.role_name }.include?('Admin')
+     if user.roles.map { |role| role.role_name }.include?('Admin') || user.roles.map { |role| role.role_name }.include?('HR')
       can :manage, :all
       can :access, :rails_admin      # only allow admin users to access Rails Admin 
     end
