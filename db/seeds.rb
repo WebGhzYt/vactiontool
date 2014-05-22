@@ -8,7 +8,7 @@
  ActiveRecord::Base.connection.execute("TRUNCATE roles")
  ActiveRecord::Base.connection.reset_pk_sequence!('roles')
 
-  roles = ['Admin','Manager','Employee']
+  roles = ['Admin','Manager','Employee', 'HR']
 
   roles.each do |index|
      role = Role.new(:role_name => index)
