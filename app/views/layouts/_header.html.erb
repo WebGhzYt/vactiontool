@@ -16,7 +16,7 @@
 
           <%#= link_to "Dashboard", vacations_home_path, :class => 'navbar-text' %>
   
-          <% if current_user.roles.map { |e| e.role_name }.include?("HR")%>
+          <% if current_user.roles.map { |e| e.role_name }.include?("HR") || current_user.roles.map { |e| e.role_name }.include?("Admin") %>
             <%= link_to "HR Corner", rails_admin_path, :class => 'navbar-text' ,"data-no-turbolink" => true %>
           <% end %></b>
 
