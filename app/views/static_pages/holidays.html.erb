@@ -1,0 +1,22 @@
+<div class="jumbotron containerwidth">
+  <table class="table table-striped table-hover table-bordered widthOfTable">
+    <thead>
+      <tr>
+        <th>Occassion</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+
+    <% @official_holidays.each do |key, value| %>
+    
+    <tbody>
+      <% value.each do |k,v| %>
+      <tr>
+        <td><%= k[:name] %></td>
+        <td><%= k[:mday] %> / <%= key %> / <%= Time.now.year %></td>
+      </tr>  
+    </tbody>
+      <% end %>
+    <% end %>
+  </table>
+</div>

@@ -7,6 +7,7 @@ VacationTool::Application.routes.draw do
 
   #get "vacations/home"
   get "static_pages/home"
+  get "static_pages/holidays"
   get "users/users_sign_in"
   
   get 'leaves/:id/approve_leave' => 'leaves#approve_leave' , :as => 'approve_leave'

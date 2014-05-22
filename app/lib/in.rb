@@ -22,11 +22,11 @@ module Holidays
             # {:function => lambda { |year| Holidays.easter(year)-2 }, :function_id => "easter(year)-2", :name => "Viernes Santo", :regions => [:in]}],
       1 => [{:mday => 1, :name => "New Year Celebration", :regions => [:in]},{:mday => 14, :name => "Makar Sakranti", :regions => [:in]},{:mday => 26, :name => "Republic Day", :regions => [:in]}],
       3 => [{:mday => 17, :name => "Holi", :regions => [:in]}],
-      4 => [{:mday => 8, :name => "Ram Navami", :regions => [:in]},{:mday => "Good Friday", :regions => [:in]}],
+      4 => [{:mday => 8, :name => "Ram Navami", :regions => [:in]},{:mday => 18, :name => "Good Friday", :regions => [:in]}],
       8 => [{:mday => 15, :name => "Independence Day", :regions => [:in]}],
       10 => [{:mday => 2, :name => "Mahatma Gandhi B’Day", :regions => [:in]},
             {:mday => 3, :name => "Dussehra", :regions => [:in]},{:mday => 23, :name => "Diwali", :regions => [:in]}],
-      12 => [{:mday => 25, :name => "Christmas", :regions => [:in]}],
+      12 => [{:mday => 25, :name => "Christmas", :regions => [:in]}]
       
       }
     end
