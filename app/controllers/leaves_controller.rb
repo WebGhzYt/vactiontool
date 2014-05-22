@@ -39,13 +39,15 @@ class LeavesController < ApplicationController
     @app_leave = leave_request.find_by_id(params[:id])
     @leave_record = LeaveRecord.find_by(user_id: @app_leave.user_id, leave_type_id: @app_leave.leave_type_id)
 
+    @hr_details = Role.find_by(:role_name => "HR").users
+
     @app_leave.approve
     
     @leaves_taken = @leave_record.leaves_taken + @app_leave.leave_days
 
     @leave_record.update_attribute(:leaves_taken , @leaves_taken)
 
-    EmployeeMailer.leave_approve_confirmation(@app_leave).deliver
+    EmployeeMailer.leave_approve_confirmation(@app_leave, @hr_details).deliver
     redirect_to leaves_requests_path    
   end
 
